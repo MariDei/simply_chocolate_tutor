@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 /* Base styles */
 body {
   font-family: 'Montserrat', sans-serif;
@@ -11,6 +15,13 @@ body {
   color: black;
   background-color: white; */
 }
+/* Base styles */
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #111111;
+  background-color: #fafafa;
+}
+
 /* Reset styles */
 h1,
 h2,
@@ -112,6 +123,8 @@ button {
   color: #111111;
   border-radius: 10px;
   border: 1px solid rgba(17, 17, 17, 0.1);
+
+  transition: color 300ms ease-in-out, border-color 300ms ease-in-out;
 }
 .socials-link:hover,
 .socials-link:focus {
@@ -123,6 +136,10 @@ button {
 }
 /* Header section */
 .header {
+  position: sticky;
+  top: -1px;
+  background-color: #fff;
+  z-index: 100;
 }
 .header-container {
   display: flex;
@@ -168,6 +185,8 @@ button {
   margin-right: 0;
 }
 .header-link {
+  position: relative;
+
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -176,6 +195,12 @@ button {
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: -0.02em;
+
+  transition: color 300ms ease-out 2s;
+  /* transition-property: color;
+  transition-duration: 300ms;
+  transition-timing-function: ease-out;
+  transition-delay: 2s; */
 }
 .header-link:hover,
 .header-link:focus {
@@ -187,6 +212,9 @@ button {
 
 .header-link.active::after {
   content: '';
+  position: absolute;
+  bottom: 0;
+
   display: block;
   width: 100%;
   height: 4px;
@@ -198,27 +226,29 @@ button {
 .hero {
   padding-bottom: 80px;
 }
+
 .hero-container {
   padding: 40px;
   padding-top: 381px;
+
   border-radius: 30px;
   background-color: rgba(17, 17, 17, 0.7);
   background-image: linear-gradient(
-    rgba(70, 23, 23, 0.1),
-    rgba(17, 17, 17, 0.1)
-  );
-  background-image: url(../images/hero-bg.jpg);
-  /* background-image: linear-gradient(to bottom, blueviolet, hotpink, lightblue); - градієнт */
+      rgba(17, 17, 17, 0.3),
+      rgba(17, 17, 17, 0.3)
+    ),
+    url(../images/hero/hero-bg.jpg);
+  /* Repeating gradient */
   /* background-image: repeating-linear-gradient(
     to right,
-    black,
-    black 20px,
-    white 20px,
-    white 40px
- ) - смугастий фон*/
+    blueviolet,
+    blueviolet 20px,
+    hotpink 20px,
+    hotpink 40px
+  ); */
+  /* background-position: left calc(50% + 200px) top calc(50% - 100px); */
   background-repeat: no-repeat;
   background-position: center;
-  /* background-position: left calc(50% + 100px) center; - img розміщується ідеально від центральної вісі контейнера*/
   background-size: cover;
 }
 .hero-title {
@@ -250,6 +280,8 @@ button {
 
   border-radius: 100px;
   border: 1px solid transparent;
+
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
 }
 .hero-btn.primary {
   background-color: #fd9222;
@@ -261,6 +293,7 @@ button {
 }
 .hero-btn.secondary {
   border-color: #fff;
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
 }
 .hero-btn.secondary:hover,
 .hero-btn.secondary:focus {
@@ -277,6 +310,8 @@ button {
   line-height: 1.28;
   letter-spacing: -0.03em;
   color: #fff;
+
+  transition: color 300ms ease-in-out;
 }
 .hero-scroll:hover,
 .hero-scroll:focus {
@@ -291,12 +326,19 @@ button {
   width: 38px;
   height: 38px;
 
+  color: #fd9222;
   background-color: #fff;
   border-radius: 50%;
+
+  transition: color 300ms ease-in-out, background-color 300ms ease-in-out;
 }
 .hero-scroll:hover .hero-icon,
 .hero-scroll:focus .hero-icon {
+  color: #fff;
   background-color: #fd9222;
+}
+.hero-arrow {
+  fill: currentColor;
 }
 
 /* Features section */
@@ -338,6 +380,8 @@ button {
   gap: 32px;
 }
 .ingridients-item {
+  position: relative;
+
   width: calc((100% - 32px * 3) / 4);
   padding: 28px 23px;
 
@@ -354,9 +398,21 @@ button {
   background-color: #1e1823;
   color: #fff;
 }
-.ingridients-item.ingridients-item:nth-child(2n) {
+.ingridients-item:nth-child(2n) {
   border-color: #fd9222;
 }
+.ingridients-icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  fill: none;
+  stroke: #fff;
+}
+.ingridients-item:nth-child(2n) .ingridients-icon {
+  stroke: #fd9222;
+}
+
 .ingridients-pic {
 }
 .ingridients-caption {
@@ -376,9 +432,48 @@ button {
   gap: 20px;
 }
 .made-left-side {
+  position: relative;
   width: 600px;
+  transition: transform 500ms ease;
+}
+.made-left-side::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  border-radius: 20px;
+  background-image: linear-gradient(hotpink, blueviolet);
+  transition: transform 500ms ease;
+  transition-delay: 0;
+}
+.made-left-side:hover::after {
+  transform: translateX(20px) translateY(20px);
+  transition-delay: 500ms;
+}
+.made-left-side:hover {
+  transform: translateX(-20px) translateY(-20px);
 }
 .made-img {
+}
+.made-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.made-btn-icon {
+  fill: none;
+  stroke: #fff;
 }
 .made-right-side {
   width: 516px;
@@ -398,6 +493,9 @@ button {
 .made-list {
 }
 .made-item {
+  display: flex;
+  gap: 8px;
+
   margin-bottom: 24px;
 
   font-size: 14px;
@@ -406,6 +504,24 @@ button {
 }
 .made-item:last-child {
   margin-bottom: 0;
+}
+.made-item::before {
+  content: '';
+
+  flex-shrink: 0;
+
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+
+  background-color: #4c4c4c;
+  border: 1px solid #eceded;
+  border-radius: 50%;
+}
+
+.made-item:hover::before {
+  background-color: red;
 }
 
 /* Products section */
@@ -468,11 +584,47 @@ button {
 }
 .bestsellers-item {
   width: calc((100% - 16px * 2) / 3);
-
-  border-radius: 15px 15px 0px 0px;
+}
+.bestsellers-wrapper {
+  position: relative;
   overflow: hidden;
 }
 .bestsellers-pic {
+  border-radius: 15px 15px 0px 0px;
+  overflow: hidden;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+
+  font-size: 14px;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+
+  background: linear-gradient(
+    165deg,
+    rgba(253, 253, 255, 0.1) 4%,
+    rgba(8, 2, 21, 0) 110%
+  );
+  border-radius: 15px 15px 0px 0px;
+  backdrop-filter: blur(8px);
+
+  transform: translateY(100%);
+  transition: transform 500ms ease-in;
+}
+
+.bestsellers-item:hover .overlay {
+  transform: translateY(0);
 }
 .bestsellers-caption {
   padding: 28px 0;
@@ -494,6 +646,9 @@ button {
 .reviews {
   padding-bottom: 120px;
 }
+.reviews-title {
+  margin-bottom: 91px;
+}
 .reviews-list {
   display: flex;
   flex-wrap: wrap;
@@ -502,18 +657,27 @@ button {
   margin-bottom: 50px;
 }
 .reviews-item {
+  position: relative;
+
   width: calc((100% - 28px * 2) / 3);
   padding: 24px;
+  padding-top: 56px;
+
   background-color: #fff;
   border-radius: 15px;
   border: 1px solid rgba(17, 17, 17, 0.1);
-  box-shadow: 0px 9.049px 100px 0px rgba(17, 17, 17, 0.03);
-  /* box-shadow: 3px 3px 15px 10px black, 3px 3px 15px 0 rgb(22, 16, 203); - багатошарова тінь*/
+
+  box-shadow: 0px 10px 100px 0px rgba(17, 17, 17, 0.03);
 }
 .reviews-avatar {
+  /* margin: 0 auto;
+  margin-top: -60px; */
+
+  position: absolute;
+  top: -42px;
+  left: calc(50% - 40px);
 }
 .reviews-user {
-  margin-top: 18px;
   margin-bottom: 24px;
 
   font-size: 18px;
@@ -578,7 +742,12 @@ button {
   margin-right: 50px;
 }
 .footer .socials-link {
+  color: #ffffff;
   border-color: rgba(255, 255, 255, 0.1);
+}
+.footer .socials-link:hover,
+.footer .socials-link:focus {
+  color: #fd9222;
 }
 .footer-address {
   font-style: normal;
@@ -625,4 +794,61 @@ button {
 .footer-menu-link:hover,
 .footer-menu-link:focus {
   color: #fd9222;
+}
+/*=====================================*\
+  #SECTION TEAM
+\*=====================================*/
+.reviews-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  margin-top: 8px;
+}
+.reviews-elem {
+  width: 60px;
+  height: 60px;
+}
+.reviews-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: #f4f4fd;
+
+  background-color: #4d5ae5;
+  border-radius: 50%;
+}
+.reviews-link:hover,
+.reviews-link:focus {
+  background-color: #404bbf;
+}
+.reviews-icon {
+  fill: currentColor;
+}
+
+.reviews-link:hover .reviews-icon,
+.reviews-link:focus .reviews-icon {
+  fill: hotpink;
+}
+
+/*=====================================*\
+  # Modal window
+\*=====================================*/
+.backdrop {
+  display: none;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.3);
 }
